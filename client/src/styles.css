@@ -1,0 +1,477 @@
+:root {
+  --ink: #1a2218;
+  --ink-soft: #3d4a38;
+  --mute: #6b7566;
+  --paper: #f3efe4;
+  --paper-2: #e8e2d2;
+  --leaf: #2f5d3a;
+  --leaf-deep: #1e3d28;
+  --accent: #c45c26;
+  --accent-soft: rgba(196, 92, 38, 0.12);
+  --line: rgba(26, 34, 24, 0.12);
+  --shadow: 0 18px 50px rgba(26, 34, 24, 0.12);
+  --radius: 18px;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --display: 'Instrument Serif', Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(47, 93, 58, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(196, 92, 38, 0.14), transparent 50%),
+    linear-gradient(160deg, #f7f3ea 0%, var(--paper) 45%, #ebe4d4 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Login ─────────────────────────────────────────────── */
+
+.login-view {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  padding: 2.4rem 2rem 2rem;
+  background: rgba(255, 252, 245, 0.82);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.brand-mark {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 6vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--leaf-deep);
+  margin: 0 0 0.4rem;
+}
+
+.login-card p {
+  margin: 0 0 1.6rem;
+  color: var(--mute);
+  line-height: 1.45;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.field input,
+.composer input,
+.panel-fields input,
+.panel-fields textarea {
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  color: var(--ink);
+  outline: none;
+}
+
+.field input:focus,
+.composer input:focus,
+.panel-fields input:focus,
+.panel-fields textarea:focus {
+  border-color: rgba(47, 93, 58, 0.45);
+  box-shadow: 0 0 0 3px rgba(47, 93, 58, 0.12);
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--leaf);
+  color: #f7f3ea;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--leaf-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff8f2;
+}
+
+.error-text {
+  color: #a33;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+}
+
+/* ── Chat shell ────────────────────────────────────────── */
+
+.chat-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0.15rem 0.75rem;
+  gap: 1rem;
+}
+
+.topbar h1 {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  margin: 0;
+  color: var(--leaf-deep);
+  font-weight: 400;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 0.5rem 0 1rem;
+  scroll-behavior: smooth;
+}
+
+.empty-hint {
+  margin: auto 0;
+  text-align: center;
+  color: var(--mute);
+  padding: 2rem 1rem 3rem;
+}
+
+.empty-hint strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-bottom: 0.45rem;
+}
+
+.bubble {
+  max-width: min(92%, 560px);
+  padding: 0.85rem 1.05rem;
+  border-radius: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  animation: rise 0.28s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.bubble.user {
+  align-self: flex-end;
+  background: var(--leaf);
+  color: #f4f7f2;
+  border-bottom-right-radius: 6px;
+}
+
+.bubble.assistant {
+  align-self: flex-start;
+  background: rgba(255, 252, 245, 0.9);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 8px 24px rgba(26, 34, 24, 0.05);
+}
+
+.bubble-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.icon-btn {
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.icon-btn.playing {
+  background: var(--accent-soft);
+  border-color: rgba(196, 92, 38, 0.35);
+  color: var(--accent);
+}
+
+.status-line {
+  min-height: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--mute);
+  padding: 0 0.2rem 0.45rem;
+}
+
+.composer {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.65rem;
+  background: rgba(255, 252, 245, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.composer input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.55rem 0.75rem;
+  box-shadow: none;
+}
+
+.composer input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.mic-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--paper-2);
+  color: var(--leaf-deep);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mic-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mic-btn.recording {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 6px var(--accent-soft);
+  animation: pulse 1.2s ease infinite;
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 10px rgba(196, 92, 38, 0.08);
+  }
+}
+
+.send-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--leaf);
+  color: #f4f7f2;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.send-btn:disabled {
+  opacity: 0.45;
+}
+
+/* ── Overlay panels ────────────────────────────────────── */
+
+.overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 34, 24, 0.35);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: end center;
+  padding: 0;
+  z-index: 40;
+  animation: fade 0.2s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.work-panel {
+  width: min(720px, 100%);
+  max-height: min(88vh, 860px);
+  background: #fffdf8;
+  border-radius: 22px 22px 0 0;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  animation: slide 0.28s ease;
+  overflow: hidden;
+}
+
+@keyframes slide {
+  from {
+    transform: translateY(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 720px) {
+  .overlay-backdrop {
+    place-items: center;
+    padding: 1.5rem;
+  }
+  .work-panel {
+    border-radius: 22px;
+    max-height: min(82vh, 820px);
+  }
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 400;
+}
+
+.panel-body {
+  padding: 1.1rem 1.25rem 1.4rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.panel-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.panel-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.panel-fields textarea {
+  min-height: 180px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.panel-actions .btn {
+  width: auto;
+}

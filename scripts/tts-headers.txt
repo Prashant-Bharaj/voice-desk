@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Sat, 26 Sep 2026 08:39:03 GMT
+Content-Type: audio/wav
+Transfer-Encoding: chunked
+Connection: keep-alive
+server: uvicorn
+content-disposition: inline; filename="speech.wav"
+x-trace-id: 1-6ab784a7-74be5f8e2df088ea9630d4a8
+x-amzn-trace-id: Root=1-6ab784a7-6c330a214dccf09d3659b91f
+strict-transport-security: max-age=31536000; preload
+cache-control: no-store
+pragma: no-cache
+
